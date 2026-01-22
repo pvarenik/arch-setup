@@ -14,4 +14,5 @@ yay -S --needed --noconfirm \
   input-remapper-git \
   realvnc-vnc-viewer \
   zoom \
-  timeshift-autosnap
+  timeshift-autosnap \
+  cuda
