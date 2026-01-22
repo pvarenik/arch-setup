@@ -35,6 +35,7 @@ ADDITIONAL_PACKAGES=(
 )
 
 AUR_PACKAGES=(
+  "visual-studio-code-bin"
   "google-chrome"
   "slack-desktop"
   "input-remapper-git"
