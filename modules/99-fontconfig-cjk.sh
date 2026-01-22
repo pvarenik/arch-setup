@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
-sudo tee /etc/fonts/local.conf >/dev/null <<'EOF'
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [FONTCONFIG] $*"
+}
+
+log "Setting up font configuration for CJK characters..."
+
+sudo tee /etc/fonts/local.conf >/dev/null <<'EOF' || {
+    log "Failed to write font configuration file"
+    exit 1
+}
+
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
@@ -34,4 +44,10 @@ sudo tee /etc/fonts/local.conf >/dev/null <<'EOF'
 </fontconfig>
 EOF
 
-fc-cache -f -v
+log "Updating font cache..."
+fc-cache -f -v || {
+    log "Failed to update font cache"
+    exit 1
+}
+
+log "Font configuration completed successfully"

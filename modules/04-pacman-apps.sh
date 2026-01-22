@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 
-sudo pacman -S --needed --noconfirm \
-  telegram-desktop \
-  signal-desktop \
-  steam \
-  syncplay \
-  mpv \
-  vlc \
-  vlc-plugins-all \
-  krita \
-  qbittorrent \
-  partitionmanager \
-  pyside6 \
-  kdeconnect \
-  cronie \
-  sshpass \
-  rclone \
-  code \
-  timeshift
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [PACKAGES] $*"
+}
+
+log "Installing additional packages via pacman..."
+
+# Install additional packages if enabled
+if [[ "$ENABLE_PACKAGES" == true ]]; then
+  log "Installing additional packages..."
+  sudo pacman -S --needed --noconfirm "${ADDITIONAL_PACKAGES[@]}" || {
+      log "Failed to install packages"
+      exit 1
+  }
+fi
+
+log "Additional packages installed successfully"
